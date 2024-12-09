@@ -9,7 +9,7 @@ export default function Home() {
             <h1 className="text-[15px] text-center"><strong>Hello Nike APP</strong></h1>
             <h2 className="text-[11px] text-center">Download the app to access everything Nike. Get your Great</h2>
           </div>
-          <Image src="/images/heroShoes.jpg" alt="logo" width={1344} height={700} />
+          <Image src="/images/heroShoes.jpg" alt="logo"layout="responsive" width={1344} height={700} />
         </div>
 
         <div>
@@ -23,11 +23,11 @@ export default function Home() {
           <button className="w-[138.16px] h-[39px] bg-[#111111] text-white rounded-[30px] p-2">Shop Air Max</button>
         </div>
 
-        <Image src="/images/BestofAirMax.png" alt="logo" width={1344} height={700} />
+        <Image src="/images/BestofAirMax.png" alt="logo" layout="responsive"width={1344} height={700} />
 
         <div>
           <h1 className="text-[15px] font-bold pt-24 md:pt-84px">Featured</h1>
-          <Image src="/images/features.png" alt="logo" width={1344} height={700} />
+          <Image src="/images/features.png" alt="logo" layout="responsive"width={1344} height={700} />
         </div>
 
         <div>
@@ -44,15 +44,15 @@ export default function Home() {
       <div>
         <h1 className="text-[15px] w-[90.9px] h-[27px] md:w-[512px] md:h-[60px] pt-12 md:pt-96px"><strong>Gear UP</strong></h1>
         <div className="flex space-x-4">
-          <Image src="/images/gearup1.png" alt="logo" width={666} height={447} />
-          <Image src="/images/gearup2.png" alt="logo" width={666} height={447} />
+          <Image src="/images/gearup1.png" alt="logo" layout="responsive"width={666} height={447} />
+          <Image src="/images/gearup2.png" alt="logo" layout="responsive"width={666} height={447} />
         </div>
       </div>
 
       <div>
         <h1 className="text-[22px] w-[90.9px] h-[27px] md:w-[512px] md:h-[60px] pt-12 md:pt-52px"><strong>Don&apos;t Miss</strong></h1>
         <div className="pt-[52px]">
-          <Image src="/images/Dontmiss.jpg" alt="logo" width={1344} height={700} />
+          <Image src="/images/Dontmiss.jpg" alt="logo"layout="responsive" width={1344} height={700} />
         </div>
       </div>
 
@@ -63,8 +63,10 @@ export default function Home() {
       </div>
 
       <div>
-        <h1 className="text-[52px] w-11/12 md:w-[512px] h-[27px] pt-12 md:pt-96px">The Essential</h1>
-        <Image src="/images/Thessential.png" alt="logo" width={1356} height={540} />
+        <h1 className="text-[52px] w-11/12 md:w-[512px] h-[27px] pt-12 md:pt-96px pb-20px" >The Essential</h1>
+        </div>
+        <div>
+        <Image src="/images/Thessential.png" alt="logo"layout="responsive" width={1356} height={540} />
       </div>
     </div>
   );

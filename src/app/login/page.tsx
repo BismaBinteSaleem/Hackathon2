@@ -7,7 +7,7 @@ export default function Login ()  {
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
         <Link href="/">
-          <Image src="/images/Frame.jpg" alt="logo" className="w-40 mb-8 mx-auto block" />
+          <Image src="/images/Frame.jpg " alt="logo" width={24} height={24}className="w-40 mb-8 mx-auto block" />
            </Link>
 
 

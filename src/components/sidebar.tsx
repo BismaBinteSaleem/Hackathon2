@@ -1,779 +1,377 @@
 
+
+"use client"
+
+import React, { useState } from "react";
 import Image from "next/image";
 
-export default function Sidebar() {
+// Dropdown Chevron Component
+const ChevronIcon = ({ isOpen }: { isOpen: boolean }) => (
+  <svg 
+    className={`w-4 h-4 transform transition-transform ${isOpen ? 'rotate-180' : ''}`}
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+);
+
+// Main Product Page Component
+export default function ProductPage() {
+  // State for different sections
+  const [isGenderOpen, setIsGenderOpen] = useState(true);
+  const [isSportsOpen, setIsSportsOpen] = useState(false);
+  const [isBrandsOpen, setIsBrandsOpen] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+   
+  
+
+  // Sample product data
+  const products = [
+    {
+      id: 1,
+      name: "Nike Classic Shoes",
+      category: "Men's Footwear",
+      price: 10995,
+      imagePath: "/images/shoes1.png"
+    },
+    {
+      id: 2,
+      name: "Adidas Running",
+      category: "Sports Collection",
+      price: 12495,
+      imagePath: "/images/shoes2.png"
+    },
+    {
+      id: 3,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes3.png"
+    },
+    {
+      id: 4,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes4.png"
+    },
+    {
+      id: 5,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes5.png"
+    },
+    {
+      id: 6,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes6.png"
+    },
+    {
+      id: 7,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes7.png"
+    },
+    {
+      id: 8,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes8.png"
+    },
+    {
+      id: 9,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes9.png"
+    },
+    {
+      id: 10,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes10.png"
+    },
+    {
+      id: 11,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes11.png"
+    },
+    {
+      id: 12,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes12.png"
+    },
+    {
+      id: 13,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes13.png"
+    },
+    {
+      id: 14,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes14.png"
+    },
+    {
+      id: 15,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes15.png"
+    },
+    {
+      id: 16,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes16.png"
+    },
+    {
+      id: 17,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes17.png"
+    },
+    {
+      id: 18,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes18.png"
+    },
+    {
+      id: 19,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes19.png"
+    },
+    {
+      id: 20,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes20.png"
+    },
+    {
+      id: 21,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes21.png"
+    },
+    {
+      id: 22,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes22.png"
+    },
+    {
+      id: 14,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes14.png"
+    },
+    {
+      id: 5,
+      name: "Puma Casual Wear",
+      category: "Lifestyle Shoes",
+      price: 8995,
+      imagePath: "/images/shoes5.png"
+    },
+  ];
+
+  // Sidebar Sections
+  const CategorySection = ({ 
+    title, 
+    isOpen, 
+    toggleOpen, 
+    items 
+  }: { 
+    title: string, 
+    isOpen: boolean, 
+    toggleOpen: () => void, 
+    items: string[] 
+  }) => (
+    <div className="border-b pb-4">
+      <div 
+        className="flex justify-between items-center cursor-pointer"
+        onClick={toggleOpen}
+      >
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <ChevronIcon isOpen={isOpen} />
+      </div>
+      {isOpen && (
+        <div className="mt-2 space-y-2">
+          {items.map((item) => (
+            <div key={item} className="flex items-center space-x-2">
+              <input 
+                type="checkbox" 
+                className="form-checkbox h-4 w-4 text-black" 
+              />
+              <span className="text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <div className="flex">
-      <div className="relative w-full flex flex-row items-center justify-start px-4 box-border gap-2 text-left text-sm text-gray-800 font-sans">
-        <div className="overflow-hidden flex flex-row items-center justify-start z-0">
-          <div className="overflow-hidden flex flex-row items-center justify-start px-5">
-            <div className="w-[192px] bg-white flex flex-col items-start justify-start gap-11">
-              <div className="w-[169.2px] flex flex-col items-start justify-start px-1 py-1 box-border gap-4">
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Shoes</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Sports Bras</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Tops & T-Shirts</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Hoodies & Sweatshirts</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Jackets</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Trousers & Tights</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Shorts</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Tracksuits</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Jumpsuits & Rompers</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Skirts & Dresses</div>
-                <div className="w-full text-lg font-medium h-[17px] flex items-center">Socks</div>
-                <div className="w-[101.6px] text-xl font-medium h-[38.6px] flex items-center">Accessories & Equipment</div>
+    <div className="flex flex-col md:flex-row">
+      {/* Mobile Hamburger Menu */}
+      <button 
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-black text-white rounded"
+        onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+      >
+        {isMobileSidebarOpen ? 'Close' : 'Filters'}
+      </button>
+
+      {/* Sidebar for Mobile and Desktop */}
+      <div className={`
+        fixed md:static top-0 left-0 h-full w-64 
+        bg-white shadow-md p-4 space-y-4 z-40 
+        transform transition-transform 
+        ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        md:translate-x-0 overflow-y-auto
+      `}>
+        {/* Category Sections */}
+        <CategorySection 
+          title="Gender" 
+          isOpen={isGenderOpen} 
+          toggleOpen={() => setIsGenderOpen(!isGenderOpen)}
+          items={["Men", "Women", "Kids", "Unisex"]}
+        />
+
+        <CategorySection 
+          title="Kids" 
+          isOpen={isSportsOpen} 
+          toggleOpen={() => setIsSportsOpen(!isSportsOpen)}
+          items={["Girls","Boys"]}
+        />
+
+       
+        {/* Price Range Section */}
+        <div className="pb-4">
+          <div 
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => {/* Toggle price section if needed */}}
+          >
+            <h3 className="text-lg font-semibold">Shop By Price</h3>
+            <ChevronIcon isOpen={false} />
+          </div>
+          <div className="mt-2 space-y-2">
+            {[
+              "Under ₹ 2,500", 
+              "₹ 2,501 - ₹ 7,500",
+              
+            ].map((price) => (
+              <div key={price} className="flex items-center space-x-2">
+                <input 
+                  type="checkbox" 
+                  className="form-checkbox h-4 w-4 text-black" 
+                />
+                <span className="text-sm">{price}</span>
               </div>
-
-              {/* Gender Section */}
-              <div className="flex flex-col items-start justify-start gap-5 text-sm">
-                <div className="w-full border-t border-b py-1 gap-1 flex flex-col items-center">
-                  <div className="w-full flex flex-row items-center justify-between py-4">
-                    <div className="w-[58px] text-lg font-medium h-[17px] flex items-center">Gender</div>
-                    <div className="w-[14px] h-[14px] relative">
-                      <div className="absolute top-[9.54px] left-[0.65px] rounded-tl-sm bg-black w-[9px] h-[2px] rotate-[-46deg]" />
-                      <div className="absolute top-[3.07px] left-[7.09px] rounded-br-sm bg-black w-[9px] h-[2px] rotate-[46deg]" />
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-col gap-1 px-1 py-1">
-                    <div className="flex flex-row items-center justify-start gap-2 py-1">
-                      <div className="w-[20px] h-[20px] rounded border border-gray-300" />
-                      <div className="w-[31.3px] text-sm">Men</div>
-                    </div>
-                    <div className="flex flex-row items-center justify-start gap-2 py-1">
-                      <div className="w-[20px] h-[20px] rounded border border-gray-300" />
-                      <div className="w-[55px] text-sm">Women</div>
-                    </div>
-                    <div className="flex flex-row items-center justify-start gap-2 py-1">
-                      <div className="w-[20px] h-[20px] rounded border border-gray-300" />
-                      <div className="w-[49.1px] text-sm">Unisex</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Kids Section */}
-                <div className="w-full border-b py-1 gap-1 flex flex-col items-center">
-                  <div className="w-full flex flex-row items-center justify-between py-4">
-                    <div className="w-[35.8px] text-lg font-medium h-[17px] flex items-center">Kids</div>
-                    <div className="w-[14px] h-[14px] relative">
-                      <div className="absolute top-[9.54px] left-[0.65px] rounded-tl-sm bg-black w-[9px] h-[2px] rotate-[-46deg]" />
-                      <div className="absolute top-[3.07px] left-[7.09px] rounded-br-sm bg-black w-[9px] h-[2px] rotate-[46deg]" />
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-col gap-1 px-1 py-1">
-                    <div className="flex flex-row items-center justify-start gap-2 py-1">
-                      <div className="w-[20px] h-[20px] rounded border border-gray-300" />
-                      <div className="w-[35.8px] text-sm">Boys</div>
-                    </div>
-                    <div className="flex flex-row items-center justify-start gap-2 py-1">
-                      <div className="w-[20px] h-[20px] rounded border border-gray-300" />
-                      <div className="w-[33.1px] text-sm">Girls</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Shop by Price Section */}
-                <div className="w-full border-b py-1 gap-1 flex flex-col items-center">
-                  <div className="w-full flex flex-row items-center justify-between py-4">
-                    <div className="w-[106px] text-lg font-medium h-[17px] flex items-center">Shop By Price</div>
-                    <div className="w-[14px] h-[14px] relative">
-                      <div className="absolute top-[9.54px] left-[0.65px] rounded-tl-sm bg-black w-[9px] h-[2px] rotate-[-46deg]" />
-                      <div className="absolute top-[3.07px] left-[7.09px] rounded-br-sm bg-black w-[9px] h-[2px] rotate-[46deg]" />
-                    </div>
-                  </div>
-                  <div className="w-full flex flex-col gap-1 px-1 py-1">
-                    <div className="flex flex-row items-center justify-start gap-2 py-1">
-                      <div className="w-[20px] h-[20px] rounded border border-gray-300" />
-                      <div className="w-[122.9px] text-sm">Under ₹ 2 500.00</div>
-                    </div>
-                    <div className="flex flex-row items-center justify-start gap-2 py-1">
-                      <div className="w-[20px] h-[20px] rounded border border-gray-300" />
-                      <div className="w-[110.5px] text-sm">₹ 2 501.00 - ₹ 7 500.00</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Sidebar Separator */}
-            <div className="absolute top-[calc(50%-437.3px)] right-0 overflow-hidden flex flex-row items-center justify-start py-2 z-1">
-              <div className="w-[7px] h-[329px] rounded bg-black opacity-50" />
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Product Details */}
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Product 1 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
+      {/* Product Grid */}
+      <main className="flex-grow p-4 md:p-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
+          {products.map((product) => (
+            <div key={product.id} className="bg-white shadow-md rounded-lg overflow-hidden transform transition-transform hover:scale-105">
+              <div className="relative w-full pt-[100%]">
+                <Image 
+                  src={product.imagePath} 
+                  alt={product.name} 
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="absolute top-0 left-0 object-cover"
+                  quality={75}
+                />
+              </div>
+              <div className="p-3">
+                <h3 className="text-sm md:text-base font-semibold truncate">{product.name}</h3>
+                <p className="text-xs md:text-sm text-gray-600">{product.category}</p>
+                <div className="flex justify-between items-center mt-1">
+                  <span className="text-sm md:text-base font-bold">₹ {product.price.toLocaleString()}</span>
+                </div>
               </div>
             </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes1.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
+          ))}
         </div>
-        {/* 2 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes2.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 3 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes3.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 4 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes4.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 5 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes5.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 6 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes6.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 7 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes7.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 8 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes8.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 9 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes9.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 10 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes10.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 11 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes11.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 12 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes12.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 13 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes13.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 14 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes14.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 15 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes15.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 16 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes16.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 17 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes17.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 18 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes18.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 19 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes19.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 20*/}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes20.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 21 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes21.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-        {/* 22 */}
-        <div className="relative w-full">
-          <div className="absolute top-[348px] left-0 w-[348px] h-[185px]">
-            <div className="absolute top-[9px] left-0 flex flex-col items-start justify-start">
-              <div className="relative leading-[28px] font-medium">Just In</div>
-              <div className="flex flex-col items-start justify-start px-[3.3px] text-[#111]">
-                <div className="relative leading-[24px] font-medium">Nike Air Force 1 Mid &#39;07</div>
-                <div className="relative leading-[24px] text-[#757575]">Men&#39;s Shoes</div>
-              </div>
-            </div>
-            <div className="absolute top-[90px] left-0 leading-[24px] text-[#757575] text-center flex items-center justify-center w-[60.7px] h-[17px]">
-              1 Colour
-            </div>
-            <div className="absolute top-[126px] left-0 leading-[28px] font-medium text-[#111] flex items-center w-[132.4px] h-[17px]">
-              MRP : ₹ 10 795.00
-            </div>
-          </div>
-          <Image
-            className="absolute w-full top-0 right-0 left-0 max-w-full overflow-hidden h-[348px] object-cover"
-            src="/images/shoes22.png"
-            alt="Product 1"
-            width={348}
-            height={348}
-          />
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </div>
+      </main>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+      
+           
+         
+        
+      
