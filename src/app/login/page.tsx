@@ -6,9 +6,10 @@ export default function Login ()  {
     <div className="bg-white-50 font-sans">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-md w-full">
-          <Link href="/">
-            <img src="/images/Frame.jpg" alt="logo" className="w-40 mb-8 mx-auto block " />
-          </Link>
+        <Link href="/">
+          <Image src="/images/Frame.jpg" alt="logo" className="w-40 mb-8 mx-auto block" />
+           </Link>
+
 
           <div className="p-8 rounded-2xl bg-white shadow-md">
             <h2 className="text-gray-800 text-center text-2xl font-bold"> YOUR ACCOUNT FOR EVERYTHING NIKE  </h2>
@@ -85,17 +86,18 @@ export default function Login ()  {
 
               {/* Privacy Policy and Terms of Use Section */}
               <div className="text-center mt-3 text-sm text-gray-600">
-                <span>
-                  By logging in, you agree to Nike's{' '}
-                  <Link href="/privacy-policy" className="underline text-blue-600">
-                    Privacy Policy
+                  <span>
+                  By logging in, you agree to Nike&apos;s{' '}
+                 <Link href="/privacy-policy" className="underline text-blue-600">
+                         Privacy Policy
                   </Link>{' '}
-                  and{' '}
+                      and{' '}
                   <Link href="/terms-of-use" className="underline text-blue-600">
-                    Terms of Use
-                  </Link>.
-                </span>
-              </div>
+                       Terms of Use
+                        </Link>.
+                     </span>
+                </div>
+
 
               <div className="mt-8">
                 <button

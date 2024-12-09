@@ -47,7 +47,7 @@ export default function Join() {
           <div className="absolute top-[452px] left-0 w-full h-[59px] text-center text-[12px]">
             <div className="absolute top-[4px] left-[7.44px] leading-[16px] flex items-center w-[309.3px] h-[30px]">
               <span className="w-full">
-                <span>By creating an account, you agree to Nike's </span>
+                <span>By creating an account, you agree to Nike&apos;s </span>
                 <span className="underline font-medium">Privacy Policy</span>
                 <span> and </span>
                 <span className="underline font-medium">Terms of Use</span>

@@ -5,13 +5,13 @@ const AutoLayoutHorizontal: NextPage = () => {
   return (
     <div className="relative shadow-[inset_0px_0px_0px_#e5e5e5,_inset_0px_0px_0px_#e5e5e5,_inset_0px_-1px_0px_#e5e5e5,_inset_0px_0px_0px_#e5e5e5] bg-transparent w-full flex flex-row items-start justify-start py-[24px] box-border text-left text-[15px] text-[#757575] font-inter">
       <div className="flex flex-row items-start justify-start gap-[30px]">
-        <Image className="relative overflow-hidden flex-shrink-0 object-cover" src="/Frame.png" alt="" width={150} height={150} />
+        <Image className="relative overflow-hidden flex-shrink-0 object-cover" src="/images/Frame.png" alt="Frame" width={150} height={150} />
         <div className="flex-1 flex flex-col items-start justify-start gap-[24px]">
           <div className="flex flex-row items-start justify-start gap-[178.8px]">
             <div className="flex flex-col items-start justify-start">
               <div className="relative leading-[28px] font-medium text-[#111]">Nike Dri-FIT ADV TechKnit Ultra</div>
               <div className="overflow-hidden flex flex-row items-start justify-start px-[3.3px]">
-                <div className="relative leading-[28px]">Men's Short-Sleeve Running Top</div>
+                <div className="relative leading-[28px]">Men&apos;s Short-Sleeve Running Top</div>
               </div>
               <div className="overflow-hidden flex flex-row items-start justify-start px-[62.3px]">
                 <div className="relative leading-[28px]">Ashen Slate/Cobalt Bliss</div>
